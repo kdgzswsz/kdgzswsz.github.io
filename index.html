@@ -163,9 +163,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Confirmation dialog
-  // 如果确认，则跳转到指定的网页
-}
-
+            // 如果确认，则跳转到指定的网页
 
             const cardData = JSON.parse(localStorage.getItem('cards')) || [
                 { href: 'https://kdgzs.wochaonima.top/', icon: 'fas fa-search', text: '可多工作室官网', description: '就是官网嘛' },
@@ -189,6 +187,8 @@
                 `;
                 cardContainer.appendChild(cardElement);
             }
+
+            console.log(cardData); // 检查 cardData 是否正确
 
             cardData.forEach(createCard);
         });
