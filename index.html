@@ -27,16 +27,38 @@
             100% { background-position: 0% 50%; }
         }
 
-        .intro {
-            text-align: center;
-            margin: 20px;
-            width: 90%;
+        .intro, .card-container, footer {
+            display: none; /* Initially hide main content */
         }
 
-        .intro h1, .intro h3 {
-            margin: 0;
+        /* Video overlay styling */
+        #video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
         }
 
+        #exit-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            background: #ff4444;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        /* Main content styling remains the same */
         .card-container {
             display: flex;
             flex-wrap: wrap;
@@ -59,97 +81,19 @@
             transform: translateY(-5px);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
         }
-
-        .card a {
-            text-decoration: none;
-            color: #4b6cb7;
-            font-weight: bold;
-            display: block;
-            padding: 10px;
-            font-size: 18px;
-            transition: color 0.3s;
-        }
-
-        .card a:hover {
-            color: #182848;
-        }
-
-        .card i {
-            margin-right: 10px;
-            font-size: 24px;
-        }
-
-        .card-description {
-            font-size: 14px;
-            color: #ccc;
-            margin-top: 10px;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #4b6cb7, #182848);
-            transition: background 0.5s;
-        }
-
-        .color-picker {
-            margin: 20px;
-            text-align: center;
-            position: fixed;
-            right: 20px;
-            top: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
-            border-radius: 10px;
-        }
-
-        .color-picker label {
-            margin-right: 10px;
-            font-size: 18px;
-        }
-
-        .color-picker input {
-            margin-right: 20px;
-        }
-
-        .custom-card-form {
-            display: none;
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .custom-card-form input {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .custom-card-form button {
-            padding: 10px;
-            background: #4b6cb7;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            box-sizing: border-box;
-            transition: background 0.3s;
-        }
-
-        .custom-card-form button:hover {
-            background: #182848;
-        }
     </style>
 </head>
 <body>
+    <!-- Video overlay -->
+    <div id="video-overlay">
+        <video id="intro-video" autoplay muted>
+            <source src="xhd.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button id="exit-button">退出视频</button>
+    </div>
+
+    <!-- Main content -->
     <div class="intro">
         <h1>《可多全家桶》</h1>
         <h3>这里有可多工作室的所有项目</h3>
@@ -162,8 +106,17 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Confirmation dialog
-            // 如果确认，则跳转到指定的网页
+            // Hide video and show main content on exit button click
+            const exitButton = document.getElementById('exit-button');
+            const videoOverlay = document.getElementById('video-overlay');
+            const intro = document.querySelector('.intro');
+            const cardContainer = document.querySelector('.card-container');
+
+            exitButton.addEventListener('click', () => {
+                videoOverlay.style.display = 'none';  // Hide video overlay
+                intro.style.display = 'block';  // Show main content
+                cardContainer.style.display = 'flex';
+            });
 
             const cardData = JSON.parse(localStorage.getItem('cards')) || [
                 { href: 'https://kdgzs.wochaonima.top/', icon: 'fas fa-search', text: '可多工作室官网', description: '就是官网嘛' },
@@ -173,8 +126,6 @@
                 { href: 'https://h5.lcim.site/#/pages/login/index', icon: 'fas fa-search', text: '凌CIM h5', description: '嗨嗨嗨，也是加上h5段了' },
                 { href: 'https://kdgzswsz.github.io/kdsq', icon: 'fas fa-search', text: '好康网站', description: '《可多x小黄书》' },
             ];
-
-            const cardContainer = document.getElementById('card-container');
 
             function createCard(card) {
                 const cardElement = document.createElement('div');
@@ -187,8 +138,6 @@
                 `;
                 cardContainer.appendChild(cardElement);
             }
-
-            console.log(cardData); // 检查 cardData 是否正确
 
             cardData.forEach(createCard);
         });
