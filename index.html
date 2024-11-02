@@ -27,11 +27,73 @@
             100% { background-position: 0% 50%; }
         }
 
-        .intro, .card-container, footer {
-            display: none; /* Initially hide main content */
+        .intro {
+            text-align: center;
+            margin: 20px;
+            width: 90%;
         }
 
-        /* Video overlay styling */
+        .intro h1, .intro h3 {
+            margin: 0;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 220px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .card a {
+            text-decoration: none;
+            color: #4b6cb7;
+            font-weight: bold;
+            display: block;
+            padding: 10px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .card a:hover {
+            color: #182848;
+        }
+
+        .card i {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .card-description {
+            font-size: 14px;
+            color: #ccc;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #4b6cb7, #182848);
+            transition: background 0.5s;
+        }
+
+        /* 视频覆盖层样式 */
         #video-overlay {
             position: fixed;
             top: 0;
@@ -42,7 +104,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 999;
+            z-index: 9999;
         }
 
         #exit-button {
@@ -55,45 +117,21 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            z-index: 1000;
-        }
-
-        /* Main content styling */
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .card {
-            background-color: #444;
-            padding: 15px; /* 调整为原来的大小 */
-            border-radius: 10px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            width: 200px; /* 设置为原始宽度 */
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
         }
     </style>
 </head>
 <body>
-    <!-- Video overlay -->
+    <!-- 视频覆盖层 -->
     <div id="video-overlay">
-        <video id="intro-video" autoplay>
+        <video id="intro-video" autoplay controls>
             <source src="xhd.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <button id="exit-button">退出视频</button>
     </div>
 
-    <!-- Main content -->
+    <!-- 主内容 -->
     <div class="intro">
         <h1>《可多全家桶》</h1>
         <h3>这里有可多工作室的所有项目</h3>
@@ -111,9 +149,10 @@
             const intro = document.querySelector('.intro');
             const cardContainer = document.querySelector('.card-container');
 
+            // 退出按钮点击事件
             exitButton.addEventListener('click', () => {
-                videoOverlay.style.display = 'none';  // Hide video overlay
-                intro.style.display = 'block';  // Show main content
+                videoOverlay.style.display = 'none';  // 隐藏视频覆盖层
+                intro.style.display = 'block';  // 显示主内容
                 cardContainer.style.display = 'flex';
             });
 
