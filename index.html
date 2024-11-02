@@ -93,45 +93,63 @@
             transition: background 0.5s;
         }
 
-        /* 视频覆盖层样式 */
-        #video-overlay {
+        .color-picker {
+            margin: 20px;
+            text-align: center;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
+            right: 20px;
+            top: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
         }
 
-        #exit-button {
+        .color-picker label {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .color-picker input {
+            margin-right: 20px;
+        }
+
+        .custom-card-form {
+            display: none;
             position: fixed;
-            top: 10px;
-            left: 10px;
-            padding: 10px 20px;
-            background: #ff4444;
+            bottom: 80px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .custom-card-form input {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .custom-card-form button {
+            padding: 10px;
+            background: #4b6cb7;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            z-index: 10000;
+            width: 100%;
+            box-sizing: border-box;
+            transition: background 0.3s;
+        }
+
+        .custom-card-form button:hover {
+            background: #182848;
         }
     </style>
 </head>
 <body>
-    <!-- 视频覆盖层 -->
-    <div id="video-overlay">
-        <video id="intro-video" autoplay controls>
-            <source src="xhd.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <button id="exit-button">退出视频</button>
-    </div>
-
-    <!-- 主内容 -->
     <div class="intro">
         <h1>《可多全家桶》</h1>
         <h3>这里有可多工作室的所有项目</h3>
@@ -142,20 +160,35 @@
         <!-- 初始卡片将在这里显示 -->
     </div>
 
+    <!-- 视频播放覆盖层 -->
+    <div id="video-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); display: flex; justify-content: center; align-items: center; z-index: 10;">
+        <video id="background-video" src="xhd.mp4" controls autoplay style="max-width: 90vw; max-height: 90vh;"></video>
+        <button onclick="exitVideo()" style="position: absolute; top: 20px; left: 20px; padding: 10px; font-size: 16px; background-color: red; color: white; border: none; border-radius: 5px; cursor: pointer;">退出视频</button>
+    </div>
+
+    <audio id="background-music" src="background-music.mp3" loop></audio>
+
     <script>
+        // 页面加载时播放背景音乐
+        const backgroundMusic = document.getElementById("background-music");
+        backgroundMusic.play();
+
+        // 退出视频的函数
+        function exitVideo() {
+            // 隐藏视频容器
+            document.getElementById("video-container").style.display = "none";
+            // 停止视频播放并恢复背景音乐
+            document.getElementById("background-video").pause();
+            backgroundMusic.play();
+        }
+        
+        // 视频播放时自动暂停背景音乐
+        document.getElementById("background-video").addEventListener("play", () => {
+            backgroundMusic.pause();
+        });
+
+        // 初始化卡片数据
         document.addEventListener('DOMContentLoaded', () => {
-            const exitButton = document.getElementById('exit-button');
-            const videoOverlay = document.getElementById('video-overlay');
-            const intro = document.querySelector('.intro');
-            const cardContainer = document.querySelector('.card-container');
-
-            // 退出按钮点击事件
-            exitButton.addEventListener('click', () => {
-                videoOverlay.style.display = 'none';  // 隐藏视频覆盖层
-                intro.style.display = 'block';  // 显示主内容
-                cardContainer.style.display = 'flex';
-            });
-
             const cardData = JSON.parse(localStorage.getItem('cards')) || [
                 { href: 'https://kdgzs.wochaonima.top/', icon: 'fas fa-search', text: '可多工作室官网', description: '就是官网嘛' },
                 { href: 'https://kdgzs.wochaonima.top/kdxxjss/', icon: 'fas fa-search', text: 'xxj aw', description: '帮助学习机用户访问网站' },
@@ -164,6 +197,8 @@
                 { href: 'https://h5.lcim.site/#/pages/login/index', icon: 'fas fa-search', text: '凌CIM h5', description: '嗨嗨嗨，也是加上h5段了' },
                 { href: 'https://kdgzswsz.github.io/kdsq', icon: 'fas fa-search', text: '好康网站', description: '《可多x小黄书》' },
             ];
+
+            const cardContainer = document.getElementById('card-container');
 
             function createCard(card) {
                 const cardElement = document.createElement('div');
