@@ -58,7 +58,7 @@
             z-index: 1000;
         }
 
-        /* Main content styling remains the same */
+        /* Main content styling */
         .card-container {
             display: flex;
             flex-wrap: wrap;
@@ -69,24 +69,24 @@
 
         .card {
             background-color: #444;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            width: 220px;
+            padding: 15px; /* 调整为原来的大小 */
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            width: 200px; /* 设置为原始宽度 */
             text-align: center;
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 <body>
     <!-- Video overlay -->
     <div id="video-overlay">
-        <video id="intro-video" autoplay muted>
+        <video id="intro-video" autoplay>
             <source src="xhd.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -106,7 +106,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Hide video and show main content on exit button click
             const exitButton = document.getElementById('exit-button');
             const videoOverlay = document.getElementById('video-overlay');
             const intro = document.querySelector('.intro');
