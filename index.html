@@ -160,32 +160,12 @@
         <!-- 初始卡片将在这里显示 -->
     </div>
 
-    <!-- 视频播放覆盖层 -->
-    <div id="video-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); display: flex; justify-content: center; align-items: center; z-index: 10;">
-        <video id="background-video" src="xhd.mp4" controls autoplay style="max-width: 90vw; max-height: 90vh;"></video>
-        <button onclick="exitVideo()" style="position: absolute; top: 20px; left: 20px; padding: 10px; font-size: 16px; background-color: red; color: white; border: none; border-radius: 5px; cursor: pointer;">退出视频</button>
-    </div>
-
     <audio id="background-music" src="background-music.mp3" loop></audio>
 
     <script>
         // 页面加载时播放背景音乐
         const backgroundMusic = document.getElementById("background-music");
         backgroundMusic.play();
-
-        // 退出视频的函数
-        function exitVideo() {
-            // 隐藏视频容器
-            document.getElementById("video-container").style.display = "none";
-            // 停止视频播放并恢复背景音乐
-            document.getElementById("background-video").pause();
-            backgroundMusic.play();
-        }
-        
-        // 视频播放时自动暂停背景音乐
-        document.getElementById("background-video").addEventListener("play", () => {
-            backgroundMusic.pause();
-        });
 
         // 初始化卡片数据
         document.addEventListener('DOMContentLoaded', () => {
@@ -220,3 +200,4 @@
     </script>
 </body>
 </html>
+
