@@ -27,6 +27,43 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* 新增新年文字动画 */
+        .new-year-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4em;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: smashIn 4s forwards;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        @keyframes smashIn {
+            0% {
+                transform: translate(-50%, -200vh) rotateX(60deg) rotateZ(45deg) scale(4);
+                opacity: 0;
+                filter: blur(30px);
+            }
+            30% {
+                transform: translate(-50%, -50%) rotateX(0) rotateZ(0) scale(1);
+                opacity: 1;
+                filter: blur(0);
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
+                filter: blur(20px);
+            }
+        }
+
         .intro {
             text-align: center;
             margin: 20px;
@@ -58,8 +95,8 @@
         }
 
         .card a {
-            position: relative; /* 确保链接在最上层 */
-            z-index: 1; /* 提高层级 */
+            position: relative;
+            z-index: 1;
             text-decoration: none;
             color: #ffd700;
             font-weight: bold;
@@ -95,7 +132,7 @@
             transform: rotate(45deg);
             transition: opacity 0.5s;
             opacity: 0;
-            z-index: 0; /* 确保伪元素在链接下方 */
+            z-index: 0;
         }
 
         .card:hover::before {
@@ -138,13 +175,14 @@
 </head>
 <body>
     <div class="intro">
-        <h1>《可多全家桶》</h1>
-        <h3>这里有可多工作室的所有项目</h3>
-        <h3>注：这是半成品</h3>
+        <h1>可多工作室</h1>
+ 
+        <h3>“嘿，man！what can I say？”</h3>
+        <h3>“新年快乐”</h3>
     </div>
 
     <div class="card-container" id="card-container">
-        <!-- 初始卡片将在这里显示 -->
+        <!-- 卡片内容由JavaScript生成 -->
     </div>
 
     <audio id="background-music" src="background-music.mp3" loop></audio>
@@ -154,8 +192,23 @@
         const backgroundMusic = document.getElementById("background-music");
         backgroundMusic.play();
 
-        // 初始化卡片数据
         document.addEventListener('DOMContentLoaded', () => {
+            // 创建新年文字特效
+            function createNewYearEffect() {
+                const text = document.createElement('div');
+                text.className = 'new-year-text';
+                text.textContent = '新年好';
+                document.body.appendChild(text);
+
+                text.addEventListener('animationend', () => {
+                    text.remove();
+                });
+            }
+
+            // 延迟1秒显示新年文字
+            setTimeout(createNewYearEffect, 10);
+
+            // 初始化卡片数据
             const cardData = JSON.parse(localStorage.getItem('cards')) || [
                 { href: 'http://bbs.haohaokandianying.com/', icon: 'fas fa-search', text: '辛氕社区', description: '不绰的社区' },
                 { href: 'https://kdgzs.wochaonima.top/', icon: 'fas fa-search', text: '可多工作室官网', description: '就是官网课~多~的官网' },
@@ -181,9 +234,8 @@
                 `;
                 cardContainer.appendChild(cardElement);
 
-                // 添加点击事件监听器（可选）
                 cardElement.addEventListener('click', () => {
-                    window.open(card.href, '_blank'); // 在新标签页打开链接
+                    window.open(card.href, '_blank');
                 });
             }
 
@@ -198,7 +250,6 @@
                 firework.style.animationDuration = `${Math.random() * 2 + 3}s`;
                 document.body.appendChild(firework);
 
-                // 烟花爆炸效果
                 setTimeout(() => {
                     const explosion = document.createElement('div');
                     explosion.className = 'firework-explosion';
@@ -206,19 +257,16 @@
                     explosion.style.top = firework.style.top;
                     document.body.appendChild(explosion);
 
-                    // 移除爆炸效果
                     setTimeout(() => {
                         explosion.remove();
                     }, 1000);
                 }, 2000);
 
-                // 移除烟花
                 setTimeout(() => {
                     firework.remove();
                 }, 3000);
             }
 
-            // 每隔3秒生成一个烟花
             setInterval(createFirework, 3000);
         });
     </script>
