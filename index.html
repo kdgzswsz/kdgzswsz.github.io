@@ -1,203 +1,220 @@
 <!DOCTYPE html>
-<html lang="kd">
+<html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>xxj aw</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-            background: linear-gradient(135deg, #4b6cb7, #182848, #7b5caa, #5e2a8a);
-            background-size: 400% 400%;
-            animation: gradient-animation 15s ease infinite;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>xxj aw</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      text-align: center;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
 
-        @keyframes gradient-animation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 30px;
+      animation: glow 2s infinite alternate;
+      text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00b3b3;
+    }
 
-        .intro {
-            text-align: center;
-            margin: 20px;
-            width: 90%;
-        }
+    .countdown {
+      font-size: 2rem;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-        .intro h1, .intro h3 {
-            margin: 0;
-        }
+    .time-box {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
 
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-        }
+    .time-box:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+    }
 
-        .card {
-            background-color: #444;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            width: 220px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+    .time-box span {
+      display: block;
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: #00ffcc;
+      animation: scaleUp 1s infinite alternate;
+    }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-        }
+    .label {
+      font-size: 1.2rem;
+      margin-top: 5px;
+      text-transform: uppercase;
+      color: #fff;
+    }
 
-        .card a {
-            text-decoration: none;
-            color: #4b6cb7;
-            font-weight: bold;
-            display: block;
-            padding: 10px;
-            font-size: 18px;
-            transition: color 0.3s;
-        }
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #00ffcc, 0 0 20px #00b3b3, 0 0 30px #008080;
+      }
+      to {
+        text-shadow: 0 0 20px #00b3b3, 0 0 30px #008080, 0 0 40px #005f5f;
+      }
+    }
 
-        .card a:hover {
-            color: #182848;
-        }
+    @keyframes scaleUp {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.1);
+      }
+    }
 
-        .card i {
-            margin-right: 10px;
-            font-size: 24px;
-        }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+      margin-top: 30px;
+    }
 
-        .card-description {
-            font-size: 14px;
-            color: #ccc;
-            margin-top: 10px;
-        }
+    .card {
+      background-color: #444;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 220px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-        footer {
-            text-align: center;
-            margin-top: auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #4b6cb7, #182848);
-            transition: background 0.5s;
-        }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    }
 
-        .color-picker {
-            margin: 20px;
-            text-align: center;
-            position: fixed;
-            right: 20px;
-            top: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
-            border-radius: 10px;
-        }
+    .card a {
+      text-decoration: none;
+      color: #4b6cb7;
+      font-weight: bold;
+      display: block;
+      padding: 10px;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
 
-        .color-picker label {
-            margin-right: 10px;
-            font-size: 18px;
-        }
+    .card a:hover {
+      color: #182848;
+    }
 
-        .color-picker input {
-            margin-right: 20px;
-        }
+    .card i {
+      margin-right: 10px;
+      font-size: 24px;
+    }
 
-        .custom-card-form {
-            display: none;
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .custom-card-form input {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .custom-card-form button {
-            padding: 10px;
-            background: #4b6cb7;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            box-sizing: border-box;
-            transition: background 0.3s;
-        }
-
-        .custom-card-form button:hover {
-            background: #182848;
-        }
-    </style>
+    .card-description {
+      font-size: 14px;
+      color: #ccc;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-    <div class="intro">
-        <h1>《可多全家桶》</h1>
-        <h3>这里有可多工作室的所有项目</h3>
-        <h3>注：这是半成品</h3>
+  <div>
+    <h1>距离2025年新年还有</h1>
+    <div class="countdown">
+      <div class="time-box">
+        <span id="days">00</span>
+        <div class="label">天</div>
+      </div>
+      <div class="time-box">
+        <span id="hours">00</span>
+        <div class="label">小时</div>
+      </div>
+      <div class="time-box">
+        <span id="minutes">00</span>
+        <div class="label">分钟</div>
+      </div>
+      <div class="time-box">
+        <span id="seconds">00</span>
+        <div class="label">秒</div>
+      </div>
     </div>
+  </div>
 
-    <div class="card-container" id="card-container">
-        <!-- 初始卡片将在这里显示 -->
-    </div>
+  <div class="card-container" id="card-container">
+    <!-- 初始卡片将在这里显示 -->
+  </div>
 
-    <audio id="background-music" src="background-music.mp3" loop></audio>
+  <script>
+    const newYear = new Date('2025-01-29T00:00:00+08:00').getTime();
 
-    <script>
-        // 页面加载时播放背景音乐
-        const backgroundMusic = document.getElementById("background-music");
-        backgroundMusic.play();
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeLeft = newYear - now;
 
-        // 初始化卡片数据
-        document.addEventListener('DOMContentLoaded', () => {
-            const cardData = JSON.parse(localStorage.getItem('cards')) || [
-                { href: 'http://38.6.216.34:81//', icon: 'fas fa-search', text: '微论坛', description: 'CD论坛关站，我们新的选择！' },
-                { href: 'https://kdgzs.wochaonima.top/', icon: 'fas fa-search', text: '可多工作室官网', description: '就是官网嘛' },
-                { href: 'https://kdgzs.wochaonima.top/kdxxjss/', icon: 'fas fa-search', text: 'xxj aw', description: '帮助学习机用户访问网站' },
-                { href: 'https://zhzgpt.zeabur.app', icon: 'fas fa-search', text: 'ChatGPT free API', description: '可多 x zhz 史诗级著作' },
-                { href: 'https://web.lcim.site', icon: 'fas fa-search', text: '凌CIM', description: '合作伙伴广告' },
-                { href: 'https://h5.lcim.site/#/pages/login/index', icon: 'fas fa-search', text: '凌CIM h5', description: 'h5段' },
-                { href: 'https://h5.lcim.site/#/pages/login/index', icon: 'fas fa-search', text: '凌泡IM', description: '新泡泡' },
-                { href: 'https://h5.lcim.site/#/pages/login/index', icon: 'fas fa-search', text: '凌泡IM h5', description: 'h5段' },
-                { href: 'https://kdgzswsz.github.io/kdsq', icon: 'fas fa-search', text: '好康网站', description: '《可多x小黄书》' },
-            ];
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-            const cardContainer = document.getElementById('card-container');
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
 
-            function createCard(card) {
-                const cardElement = document.createElement('div');
-                cardElement.className = 'card';
-                cardElement.innerHTML = `
-                    <a href="${card.href}" target="_blank">
-                        <i class="${card.icon}"></i>${card.text}
-                    </a>
-                    <div class="card-description">${card.description}</div>
-                `;
-                cardContainer.appendChild(cardElement);
-            }
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        document.querySelector('h1').textContent = '新年快乐！🎆';
+        document.querySelector('.countdown').style.display = 'none';
+      }
+    }
 
-            cardData.forEach(createCard);
-        });
-    </script>
+    const interval = setInterval(updateCountdown, 1000);
+
+    // 初始化卡片数据
+    document.addEventListener('DOMContentLoaded', () => {
+      const cardData = [
+        { href: 'http://38.6.216.34:81//', icon: 'fas fa-search', text: '微论坛', description: 'CD论坛关站，我们新的选择！' },
+        { href: 'https://kdgzs.wochaonima.top/', icon: 'fas fa-search', text: '可多工作室官网', description: '就是官网嘛' },
+        { href: 'https://kdgzs.wochaonima.top/kdxxjss/', icon: 'fas fa-search', text: 'xxj aw', description: '帮助学习机用户访问网站' },
+        { href: 'https://zhzgpt.zeabur.app', icon: 'fas fa-search', text: 'ChatGPT free API', description: '可多 x zhz 史诗级著作' },
+        { href: 'https://web.lcim.site', icon: 'fas fa-search', text: '凌CIM', description: '合作伙伴广告' },
+        { href: 'https://h5.lcim.site/#/pages/login/index', icon: 'fas fa-search', text: '凌CIM h5', description: 'h5段' },
+        { href: 'https://h5.lcim.site/#/pages/login/index', icon: 'fas fa-search', text: '凌泡IM', description: '新泡泡' },
+        { href: 'https://h5.lcim.site/#/pages/login/index', icon: 'fas fa-search', text: '凌泡IM h5', description: 'h5段' },
+        { href: 'https://kdgzswsz.github.io/kdsq', icon: 'fas fa-search', text: '好康网站', description: '《可多x小黄书》' },
+      ];
+
+      const cardContainer = document.getElementById('card-container');
+
+      function createCard(card) {
+        const cardElement = document.createElement('div');
+        cardElement.className = 'card';
+        cardElement.innerHTML = `
+          <a href="${card.href}" target="_blank">
+            <i class="${card.icon}"></i>${card.text}
+          </a>
+          <div class="card-description">${card.description}</div>
+        `;
+        cardContainer.appendChild(cardElement);
+      }
+
+      cardData.forEach(createCard);
+    });
+  </script>
 </body>
 </html>
-
