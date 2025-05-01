@@ -1,274 +1,213 @@
 <!DOCTYPE html>
 <html lang="kd">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>xxj aw</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-            background: linear-gradient(135deg, #d32f2f, #b71c1c, #ff6f00, #ffa000);
-            background-size: 400% 400%;
-            animation: gradient-animation 15s ease infinite;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>xxj aw</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #eee;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(135deg, #111 0%, #444 100%);
+      background-size: 300% 300%;
+      animation: blackwhite-bg 12s ease-in-out infinite;
+    }
 
-        @keyframes gradient-animation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    @keyframes blackwhite-bg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        /* 新增新年文字动画 */
-        .new-year-text {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 4em;
-            font-weight: bold;
-            color: #ffd700;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            animation: smashIn 4s forwards;
-            z-index: 9999;
-            pointer-events: none;
-        }
+    .intro {
+      text-align: center;
+      margin: 20px;
+      width: 90%;
+    }
 
-        @keyframes smashIn {
-            0% {
-                transform: translate(-50%, -200vh) rotateX(60deg) rotateZ(45deg) scale(4);
-                opacity: 0;
-                filter: blur(30px);
-            }
-            30% {
-                transform: translate(-50%, -50%) rotateX(0) rotateZ(0) scale(1);
-                opacity: 1;
-                filter: blur(0);
-            }
-            70% {
-                transform: translate(-50%, -50%) scale(1.1);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1.5);
-                opacity: 0;
-                filter: blur(20px);
-            }
-        }
+    .intro h1 {
+      margin: 0;
+      font-size: 2.5em;
+      color: #ccc;
+    }
 
-        .intro {
-            text-align: center;
-            margin: 20px;
-            width: 90%;
-        }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
 
-        .intro h1, .intro h3 {
-            margin: 0;
-        }
+    .card {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      width: 220px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-        }
+    .card a {
+      position: relative;
+      z-index: 1;
+      text-decoration: none;
+      color: #999;
+      font-weight: bold;
+      display: block;
+      padding: 10px;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
 
-        .card {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            width: 220px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
+    .card a:hover {
+      color: #bbb;
+    }
 
-        .card a {
-            position: relative;
-            z-index: 1;
-            text-decoration: none;
-            color: #ffd700;
-            font-weight: bold;
-            display: block;
-            padding: 10px;
-            font-size: 18px;
-            transition: color 0.3s;
-        }
+    .card i {
+      margin-right: 10px;
+      font-size: 24px;
+    }
 
-        .card a:hover {
-            color: #ffa000;
-        }
+    .card-description {
+      font-size: 14px;
+      color: #aaa;
+      margin-top: 10px;
+    }
 
-        .card i {
-            margin-right: 10px;
-            font-size: 24px;
-        }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.05));
+      transform: rotate(45deg);
+      transition: opacity 0.5s;
+      opacity: 0;
+      z-index: 0;
+    }
 
-        .card-description {
-            font-size: 14px;
-            color: #ccc;
-            margin-top: 10px;
-        }
+    .card:hover::before {
+      opacity: 1;
+    }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, rgba(255, 215, 0, 0.5), rgba(255, 215, 0, 0.2));
-            transform: rotate(45deg);
-            transition: opacity 0.5s;
-            opacity: 0;
-            z-index: 0;
-        }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7);
+    }
 
-        .card:hover::before {
-            opacity: 1;
-        }
+    .new-year-text {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 4em;
+      font-weight: bold;
+      color: #777;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      animation: smashIn 4s forwards;
+      z-index: 9999;
+      pointer-events: none;
+    }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .firework {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background: #ffd700;
-            border-radius: 50%;
-            animation: firework 2s ease-out infinite;
-        }
-
-        .firework-explosion {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, #ffd700, #ffa000, transparent 70%);
-            border-radius: 50%;
-            animation: explosion 1s ease-out;
-        }
-
-        @keyframes firework {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-100vh) scale(0); opacity: 0; }
-        }
-
-        @keyframes explosion {
-            0% { transform: scale(0); opacity: 1; }
-            100% { transform: scale(2); opacity: 0; }
-        }
-    </style>
+    @keyframes smashIn {
+      0% {
+        transform: translate(-50%, -200vh) rotateX(60deg) rotateZ(45deg) scale(4);
+        opacity: 0;
+        filter: blur(30px);
+      }
+      30% {
+        transform: translate(-50%, -50%) rotateX(0) rotateZ(0) scale(1);
+        opacity: 1;
+        filter: blur(0);
+      }
+      70% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+        filter: blur(20px);
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="intro">
-        <h1>永远纪念凌红科技</h1>
- 
-        <h3> </h3>
-    </div>
+  <div class="intro">
+    <h1>永远纪念凌红科技</h1>
+  </div>
 
-    <div class="card-container" id="card-container">
-        <!-- 卡片内容由JavaScript生成 -->
-    </div>
+  <div class="card-container" id="card-container">
+    <!-- 卡片内容由 JavaScript 生成 -->
+  </div>
 
-    <audio id="background-music" src="background-music.mp3" loop></audio>
+  <audio id="background-music" src="background-music.mp3" loop></audio>
 
-    <script>
-        // 页面加载时播放背景音乐
-        const backgroundMusic = document.getElementById("background-music");
-        backgroundMusic.play();
+  <script>
+    const backgroundMusic = document.getElementById("background-music");
+    backgroundMusic.play();
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // 创建新年文字特效
-            function createNewYearEffect() {
-                const text = document.createElement('div');
-                text.className = 'new-year-text';
-                text.textContent = '呜呜呜';
-                document.body.appendChild(text);
+    document.addEventListener('DOMContentLoaded', () => {
+      // 显示中心特效文字
+      function createNewYearEffect() {
+        const text = document.createElement('div');
+        text.className = 'new-year-text';
+        text.textContent = '呜呜呜';
+        document.body.appendChild(text);
 
-                text.addEventListener('animationend', () => {
-                    text.remove();
-                });
-            }
-
-            // 延迟1秒显示新年文字
-            setTimeout(createNewYearEffect, 10);
-
-            // 初始化卡片数据
-            const cardData = JSON.parse(localStorage.getItem('cards')) || [
-                { href: 'https://bbs.cnhyfg.cn/', icon: 'fas fa-search', text: '筑梦社区', description: 'lcim没了，推荐一个新社区' },
-                { href: 'https://kdgzs.wochaonima.top/', icon: 'fas fa-search', text: '可多工作室官网', description: '就是官网课~多~的官网' },
-                { href: 'https://kdgzs.wochaonima.top/kdxxjss/', icon: 'fas fa-search', text: 'xxj aw', description: '原帮助学习机用户，现 ？' },
-                { href: 'https://zhzgpt.zeabur.app', icon: 'fas fa-search', text: 'ChatGPT free API', description: 'zhz 史诗级著作' },
-                { href: 'https://kdgzswsz.github.io/kdsq', icon: 'fas fa-search', text: '好康网站', description: '《可多x小黄书》' },
-            ];
-
-            const cardContainer = document.getElementById('card-container');
-
-            function createCard(card) {
-                const cardElement = document.createElement('div');
-                cardElement.className = 'card';
-                cardElement.innerHTML = `
-                    <a href="${card.href}" target="_blank">
-                        <i class="${card.icon}"></i>${card.text}
-                    </a>
-                    <div class="card-description">${card.description}</div>
-                `;
-                cardContainer.appendChild(cardElement);
-
-                cardElement.addEventListener('click', () => {
-                    window.open(card.href, '_blank');
-                });
-            }
-
-            cardData.forEach(createCard);
-
-            // 烟花特效
-            function createFirework() {
-                const firework = document.createElement('div');
-                firework.className = 'firework';
-                firework.style.left = `${Math.random() * 100}vw`;
-                firework.style.top = `${Math.random() * 100}vh`;
-                firework.style.animationDuration = `${Math.random() * 2 + 3}s`;
-                document.body.appendChild(firework);
-
-                setTimeout(() => {
-                    const explosion = document.createElement('div');
-                    explosion.className = 'firework-explosion';
-                    explosion.style.left = firework.style.left;
-                    explosion.style.top = firework.style.top;
-                    document.body.appendChild(explosion);
-
-                    setTimeout(() => {
-                        explosion.remove();
-                    }, 1000);
-                }, 2000);
-
-                setTimeout(() => {
-                    firework.remove();
-                }, 3000);
-            }
-
-            setInterval(createFirework, 3000);
-
-            // 添加自动打开新窗口的代码
-            setTimeout(() => {
-                window.open('https://space.bilibili.com/3537115203767153', '_blank');
-            }, 3000); // 3秒后打开
+        text.addEventListener('animationend', () => {
+          text.remove();
         });
-    </script>
+      }
+
+      setTimeout(createNewYearEffect, 10);
+
+      const cardData = JSON.parse(localStorage.getItem('cards')) || [
+        { href: 'https://bbs.cnhyfg.cn/', icon: 'fas fa-search', text: '筑梦社区', description: 'lcim没了，推荐一个新社区' },
+        { href: 'https://kdgzs.wochaonima.top/', icon: 'fas fa-search', text: '可多工作室官网', description: '就是官网课~多~的官网' },
+        { href: 'https://kdgzs.wochaonima.top/kdxxjss/', icon: 'fas fa-search', text: 'xxj aw', description: '原帮助学习机用户，现 ？' },
+        { href: 'https://zhzgpt.zeabur.app', icon: 'fas fa-search', text: 'ChatGPT free API', description: 'zhz 史诗级著作' },
+        { href: 'https://kdgzswsz.github.io/kdsq', icon: 'fas fa-search', text: '好康网站', description: '《可多x小黄书》' },
+      ];
+
+      const cardContainer = document.getElementById('card-container');
+
+      function createCard(card) {
+        const cardElement = document.createElement('div');
+        cardElement.className = 'card';
+        cardElement.innerHTML = `
+          <a href="${card.href}" target="_blank">
+            <i class="${card.icon}"></i>${card.text}
+          </a>
+          <div class="card-description">${card.description}</div>
+        `;
+        cardContainer.appendChild(cardElement);
+
+        cardElement.addEventListener('click', () => {
+          window.open(card.href, '_blank');
+        });
+      }
+
+      cardData.forEach(createCard);
+
+      setTimeout(() => {
+        window.open('https://space.bilibili.com/3537115203767153', '_blank');
+      }, 3000);
+    });
+  </script>
 </body>
 </html>
