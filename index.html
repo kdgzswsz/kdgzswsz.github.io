@@ -175,10 +175,9 @@
 </head>
 <body>
     <div class="intro">
-        <h1>可多工作室</h1>
+        <h1>永远纪念凌红科技</h1>
  
-        <h3>“嘿，man！作业写完了吗？”</h3>
-        <h3>“                     ”</h3>
+        <h3> </h3>
     </div>
 
     <div class="card-container" id="card-container">
@@ -197,7 +196,7 @@
             function createNewYearEffect() {
                 const text = document.createElement('div');
                 text.className = 'new-year-text';
-                text.textContent = '新年好，开学快乐~';
+                text.textContent = '呜呜呜';
                 document.body.appendChild(text);
 
                 text.addEventListener('animationend', () => {
@@ -210,7 +209,7 @@
 
             // 初始化卡片数据
             const cardData = JSON.parse(localStorage.getItem('cards')) || [
-                { href: 'https://bbs.cnhyfg.cn/', icon: 'fas fa-search', text: '筑梦社区', description: 'lcim没了，我们的新' },
+                { href: 'https://bbs.cnhyfg.cn/', icon: 'fas fa-search', text: '筑梦社区', description: 'lcim没了，推荐一个新社区' },
                 { href: 'https://kdgzs.wochaonima.top/', icon: 'fas fa-search', text: '可多工作室官网', description: '就是官网课~多~的官网' },
                 { href: 'https://kdgzs.wochaonima.top/kdxxjss/', icon: 'fas fa-search', text: 'xxj aw', description: '原帮助学习机用户，现 ？' },
                 { href: 'https://zhzgpt.zeabur.app', icon: 'fas fa-search', text: 'ChatGPT free API', description: 'zhz 史诗级著作' },
