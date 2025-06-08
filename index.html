@@ -1,211 +1,329 @@
 <!DOCTYPE html>
 <html lang="kd">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>xxj aw</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      color: #eee;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      overflow: hidden;
-      background: linear-gradient(135deg, #111 0%, #444 100%);
-      background-size: 300% 300%;
-      animation: blackwhite-bg 12s ease-in-out infinite;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xxj aw</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #d32f2f, #b71c1c, #ff6f00, #ffa000);
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+        }
 
-    @keyframes blackwhite-bg {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    .intro {
-      text-align: center;
-      margin: 20px;
-      width: 90%;
-    }
+        .new-year-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4em;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: smashIn 4s forwards;
+            z-index: 9999;
+            pointer-events: none;
+        }
 
-    .intro h1 {
-      margin: 0;
-      font-size: 2.5em;
-      color: #ccc;
-    }
+        @keyframes smashIn {
+            0% {
+                transform: translate(-50%, -200vh) rotateX(60deg) rotateZ(45deg) scale(4);
+                opacity: 0;
+                filter: blur(30px);
+            }
+            30% {
+                transform: translate(-50%, -50%) rotateX(0) rotateZ(0) scale(1);
+                opacity: 1;
+                filter: blur(0);
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
+                filter: blur(20px);
+            }
+        }
 
-    .card-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-    }
+        .intro {
+            text-align: center;
+            margin: 20px;
+            width: 90%;
+        }
 
-    .card {
-      background-color: rgba(255, 255, 255, 0.05);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-      width: 220px;
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
+        .intro h1, .intro h3 {
+            margin: 0;
+        }
 
-    .card a {
-      position: relative;
-      z-index: 1;
-      text-decoration: none;
-      color: #999;
-      font-weight: bold;
-      display: block;
-      padding: 10px;
-      font-size: 18px;
-      transition: color 0.3s;
-    }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
 
-    .card a:hover {
-      color: #bbb;
-    }
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 220px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .card i {
-      margin-right: 10px;
-      font-size: 24px;
-    }
+        .card a {
+            position: relative;
+            z-index: 1;
+            text-decoration: none;
+            color: #ffd700;
+            font-weight: bold;
+            display: block;
+            padding: 10px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
 
-    .card-description {
-      font-size: 14px;
-      color: #aaa;
-      margin-top: 10px;
-    }
+        .card a:hover {
+            color: #ffa000;
+        }
 
-    .card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.05));
-      transform: rotate(45deg);
-      transition: opacity 0.5s;
-      opacity: 0;
-      z-index: 0;
-    }
+        .card i {
+            margin-right: 10px;
+            font-size: 24px;
+        }
 
-    .card:hover::before {
-      opacity: 1;
-    }
+        .card-description {
+            font-size: 14px;
+            color: #ccc;
+            margin-top: 10px;
+        }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7);
-    }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.5), rgba(255, 215, 0, 0.2));
+            transform: rotate(45deg);
+            transition: opacity 0.5s;
+            opacity: 0;
+            z-index: 0;
+        }
 
-    .new-year-text {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 4em;
-      font-weight: bold;
-      color: #777;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-      animation: smashIn 4s forwards;
-      z-index: 9999;
-      pointer-events: none;
-    }
+        .card:hover::before {
+            opacity: 1;
+        }
 
-    @keyframes smashIn {
-      0% {
-        transform: translate(-50%, -200vh) rotateX(60deg) rotateZ(45deg) scale(4);
-        opacity: 0;
-        filter: blur(30px);
-      }
-      30% {
-        transform: translate(-50%, -50%) rotateX(0) rotateZ(0) scale(1);
-        opacity: 1;
-        filter: blur(0);
-      }
-      70% {
-        transform: translate(-50%, -50%) scale(1.1);
-        opacity: 1;
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(1.5);
-        opacity: 0;
-        filter: blur(20px);
-      }
-    }
-  </style>
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: firework 2s ease-out infinite;
+        }
+
+        .firework-explosion {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #ffd700, #ffa000, transparent 70%);
+            border-radius: 50%;
+            animation: explosion 1s ease-out;
+        }
+
+        @keyframes firework {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(0); opacity: 0; }
+        }
+
+        @keyframes explosion {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        /* 遮罩层 */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9998;
+        }
+
+        /* 居中广告样式 */
+        .ad-banner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            z-index: 9999;
+            width: 300px;
+            text-align: center;
+        }
+
+        .ad-banner img {
+            height: 60px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+
+        .ad-close {
+            margin-top: 15px;
+            background: #ff4444;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: not-allowed;
+            opacity: 0.6;
+            transition: opacity 0.3s, cursor 0.3s;
+        }
+
+        .ad-close.enabled {
+            cursor: pointer;
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
-  <div class="intro">
-    <h1>永远纪念凌红科技</h1>
-  </div>
+    <div class="intro">
+        <h1>可多全家桶</h1>
+        <h3></h3>
+    </div>
 
-  <div class="card-container" id="card-container">
-    <!-- 卡片内容由 JavaScript 生成 -->
-  </div>
+    <div class="card-container" id="card-container"></div>
 
-  <audio id="background-music" src="background-music.mp3" loop></audio>
+    <audio id="background-music" src="background-music.mp3" loop></audio>
 
-  <script>
-    const backgroundMusic = document.getElementById("background-music");
-    backgroundMusic.play();
+    <!-- 遮罩层和广告 -->
+    <div class="overlay" id="overlay"></div>
+    <div class="ad-banner" id="adBanner">
+        <img src="ggt.png" alt="🤣">
+        <span>关注牢www，好连连</span>
+        <button id="closeAdBtn" class="ad-close">请稍等 3 秒...</button>
+    </div>
 
-    document.addEventListener('DOMContentLoaded', () => {
-      // 显示中心特效文字
-      function createNewYearEffect() {
-        const text = document.createElement('div');
-        text.className = 'new-year-text';
-        text.textContent = '呜呜呜';
-        document.body.appendChild(text);
+    <script>
+        const backgroundMusic = document.getElementById("background-music");
+        backgroundMusic.play();
 
-        text.addEventListener('animationend', () => {
-          text.remove();
+        document.addEventListener('DOMContentLoaded', () => {
+            function createNewYearEffect() {
+                const text = document.createElement('div');
+                text.className = 'new-year-text';
+                text.textContent = '广告';
+                document.body.appendChild(text);
+                text.addEventListener('animationend', () => text.remove());
+            }
+            setTimeout(createNewYearEffect, 10);
+
+            const cardData = JSON.parse(localStorage.getItem('cards')) || [
+                { href: 'https://bbs.cnhyfg.cn/', icon: 'fas fa-search', text: '筑梦社区', description: '推荐一个好社区' },
+                { href: 'https://login.xueersi.com/newLogin/logout/aHR0cHM6Ly9jb2RlLnh1ZWVyc2kuY29tL2xvZ2luL2Nsb3Nl', icon: 'fas fa-search', text: '退出账号', description: '你猜会不会退~' },
+                { href: 'https://code.xueersi.com/aix/home', icon: 'fas fa-search', text: '学而思ai创作平台', description: '只能打开一秒🤣' },
+                { href: 'https://kdgzs.wochaonima.top/', icon: 'fas fa-search', text: '可多工作室官网', description: '1.1' },
+                { href: 'https://kdgzs.wochaonima.top/kdxxjss/', icon: 'fas fa-search', text: 'xxj aw', description: '让学习机可以访问网站' },
+                { href: 'https://space.bilibili.com/3537115203767153', icon: 'fas fa-search', text: '可多室长b站', description: '牢www' },
+            ];
+
+            const cardContainer = document.getElementById('card-container');
+
+            cardData.forEach(card => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'card';
+                cardElement.innerHTML = `
+                    <a href="${card.href}" target="_blank">
+                        <i class="${card.icon}"></i>${card.text}
+                    </a>
+                    <div class="card-description">${card.description}</div>
+                `;
+                cardContainer.appendChild(cardElement);
+                cardElement.addEventListener('click', () => window.open(card.href, '_blank'));
+            });
+
+            function createFirework() {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = `${Math.random() * 100}vw`;
+                firework.style.top = `${Math.random() * 100}vh`;
+                firework.style.animationDuration = `${Math.random() * 2 + 3}s`;
+                document.body.appendChild(firework);
+
+                setTimeout(() => {
+                    const explosion = document.createElement('div');
+                    explosion.className = 'firework-explosion';
+                    explosion.style.left = firework.style.left;
+                    explosion.style.top = firework.style.top;
+                    document.body.appendChild(explosion);
+                    setTimeout(() => explosion.remove(), 1000);
+                }, 2000);
+
+                setTimeout(() => firework.remove(), 3000);
+            }
+
+            setInterval(createFirework, 3000);
         });
-      }
 
-      setTimeout(createNewYearEffect, 10);
+        // 广告逻辑
+        const closeBtn = document.getElementById('closeAdBtn');
+        const overlay = document.getElementById('overlay');
+        const adBanner = document.getElementById('adBanner');
 
-      const cardData = JSON.parse(localStorage.getItem('cards')) || [
-        { href: 'https://bbs.cnhyfg.cn/', icon: 'fas fa-search', text: '筑梦社区', description: '😄' },
-        { href: 'https://kdgzs.wochaonima.top/', icon: 'fas fa-search', text: '可多工作室官网', description: '（点击输入文本）' },
-        { href: 'http://xxjaw.furmony.top/', icon: 'fas fa-search', text: 'xxj aw', description: '帮助学习机用户访问网站' },
-      ];
-
-      const cardContainer = document.getElementById('card-container');
-
-      function createCard(card) {
-        const cardElement = document.createElement('div');
-        cardElement.className = 'card';
-        cardElement.innerHTML = `
-          <a href="${card.href}" target="_blank">
-            <i class="${card.icon}"></i>${card.text}
-          </a>
-          <div class="card-description">${card.description}</div>
-        `;
-        cardContainer.appendChild(cardElement);
-
-        cardElement.addEventListener('click', () => {
-          window.open(card.href, '_blank');
-        });
-      }
-
-      cardData.forEach(createCard);
-
-      setTimeout(() => {
-        window.open('https://space.bilibili.com/3537115203767153', '_blank');
-      }, 3000);
-    });
-  </script>
+        let seconds = 3;
+        const interval = setInterval(() => {
+            seconds--;
+            if (seconds > 0) {
+                closeBtn.textContent = `请稍等${seconds}秒...`;
+            } else {
+                clearInterval(interval);
+                closeBtn.textContent = '关闭广告';
+                closeBtn.classList.add('enabled');
+                closeBtn.disabled = false;
+                closeBtn.style.cursor = 'pointer';
+                closeBtn.addEventListener('click', () => {
+                    adBanner.remove();
+                    overlay.remove();
+                });
+            }
+        }, 1000);
+    </script>
 </body>
 </html>
