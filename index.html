@@ -236,8 +236,8 @@
     <!-- 遮罩层和广告 -->
     <div class="overlay" id="overlay"></div>
     <div class="ad-banner" id="adBanner">
-        <img src="ggt.png" alt="🤣">
-        <span>我们决定取消3秒强制广告，该功能将在7月20号前下线</span>
+        <img src="ggt.png" alt="我们将在20号前修改">
+        <span>我们决定取消3秒强制广告，改为非强制等待3秒，关注后还可以彻底取消弹窗！</span>
         <button id="closeAdBtn" class="ad-close">关闭通知</button>
     </div>
 
@@ -314,7 +314,7 @@
                 closeBtn.textContent = `请稍等${seconds}秒...`;
             } else {
                 clearInterval(interval);
-                closeBtn.textContent = '关闭广告';
+                closeBtn.textContent = '关闭通知';
                 closeBtn.classList.add('enabled');
                 closeBtn.disabled = false;
                 closeBtn.style.cursor = 'pointer';
