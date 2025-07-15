@@ -237,8 +237,8 @@
     <div class="overlay" id="overlay"></div>
     <div class="ad-banner" id="adBanner">
         <img src="ggt.png" alt="🤣">
-        <span>关注牢www</span>
-        <button id="closeAdBtn" class="ad-close">请稍等 3 秒...</button>
+        <span>我们决定取消3秒强制广告，该功能将在7月20号前下线</span>
+        <button id="closeAdBtn" class="ad-close">关闭通知</button>
     </div>
 
     <script>
@@ -249,7 +249,7 @@
             function createNewYearEffect() {
                 const text = document.createElement('div');
                 text.className = 'new-year-text';
-                text.textContent = '广告';
+                text.textContent = '通知';
                 document.body.appendChild(text);
                 text.addEventListener('animationend', () => text.remove());
             }
