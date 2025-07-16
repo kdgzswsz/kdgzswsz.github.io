@@ -210,14 +210,8 @@
             border-radius: 8px;
             padding: 8px 16px;
             font-size: 16px;
-            cursor: not-allowed;
-            opacity: 0.6;
-            transition: opacity 0.3s, cursor 0.3s;
-        }
-
-        .ad-close.enabled {
             cursor: pointer;
-            opacity: 1;
+            transition: opacity 0.3s, cursor 0.3s;
         }
     </style>
 </head>
@@ -298,27 +292,20 @@
             setInterval(createFirework, 3000);
         });
 
+        // 修改后的广告逻辑：无需等待，立即可关
         const closeBtn = document.getElementById('closeAdBtn');
         const overlay = document.getElementById('overlay');
         const adBanner = document.getElementById('adBanner');
 
-        let seconds = 3;
-        const interval = setInterval(() => {
-            seconds--;
-            if (seconds > 0) {
-                closeBtn.textContent = `请稍等${seconds}秒...`;
-            } else {
-                clearInterval(interval);
-                closeBtn.textContent = '关闭通知';
-                closeBtn.classList.add('enabled');
-                closeBtn.disabled = false;
-                closeBtn.style.cursor = 'pointer';
-                closeBtn.addEventListener('click', () => {
-                    adBanner.remove();
-                    overlay.remove();
-                });
-            }
-        }, 1000);
+        closeBtn.textContent = '关闭通知';
+        closeBtn.classList.add('enabled');
+        closeBtn.disabled = false;
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.addEventListener('click', () => {
+            adBanner.remove();
+            overlay.remove();
+        });
     </script>
 </body>
 </html>
+
