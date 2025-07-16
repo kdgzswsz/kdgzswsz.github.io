@@ -171,7 +171,6 @@
             100% { transform: scale(2); opacity: 0; }
         }
 
-        /* 遮罩层 */
         .overlay {
             position: fixed;
             inset: 0;
@@ -179,7 +178,6 @@
             z-index: 9998;
         }
 
-        /* 居中广告样式 */
         .ad-banner {
             position: fixed;
             top: 50%;
@@ -233,7 +231,6 @@
 
     <audio id="background-music" src="background-music.mp3" loop></audio>
 
-    <!-- 遮罩层和广告 -->
     <div class="overlay" id="overlay"></div>
     <div class="ad-banner" id="adBanner">
         <img src="ggt.png" alt="我们将在20号前修改">
@@ -270,13 +267,12 @@
                 const cardElement = document.createElement('div');
                 cardElement.className = 'card';
                 cardElement.innerHTML = `
-                    <a href="${card.href}" target="_blank">
+                    <a href="${card.href}">
                         <i class="${card.icon}"></i>${card.text}
                     </a>
                     <div class="card-description">${card.description}</div>
                 `;
                 cardContainer.appendChild(cardElement);
-                cardElement.addEventListener('click', () => window.open(card.href, '_blank'));
             });
 
             function createFirework() {
@@ -302,7 +298,6 @@
             setInterval(createFirework, 3000);
         });
 
-        // 广告逻辑
         const closeBtn = document.getElementById('closeAdBtn');
         const overlay = document.getElementById('overlay');
         const adBanner = document.getElementById('adBanner');
