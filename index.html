@@ -203,7 +203,7 @@
   <div class="overlay" id="overlay"></div>
   <div class="ad-banner" id="adBanner">
     <img src="ggt.png" alt="广告图片" />
-    <span>告诉你一个好消息，b站搜索牢www并关注可以取消广告哦~</span>
+    <span>这是广告</span>
     <button id="followBtn" class="follow-btn">我已关注</button>
     <button id="closeAdBtn" class="ad-close">关闭通知</button>
   </div>
@@ -225,7 +225,6 @@
         { href: 'https://code.xueersi.com/aix/home', icon: 'fas fa-search', text: '学而思ai创作平台', description: '只能打开一秒🤣' },
         { href: 'https://kdgzs.wochaonima.top/', icon: 'fas fa-search', text: '可多工作室官网', description: '1.1' },
         { href: 'https://kdgzswsz.github.io/kdxxjss/', icon: 'fas fa-search', text: 'xxj aw', description: '让学习机可以访问网站' },
-        { href: 'https://space.bilibili.com/3546753978600224?spm_id_from=333.337.0.0', icon: 'fas fa-search', text: '牢www朋友b站', description: '牢www' }
         { href: 'https://space.bilibili.com/3537115203767153', icon: 'fas fa-search', text: '可多室长b站', description: '牢www' }
       ];
 
@@ -247,20 +246,19 @@
     });
 
     document.getElementById("followBtn").addEventListener("click", () => {
-      const userReply = prompt("关注 牢www 后点击私信，再复制自动回复粘贴到此处：");
+      const userReply = prompt("关注牢www 后点击私信，再复制自动回复粘贴到此处：");
       if (userReply) {
         const normalized = userReply.replace(/[\s·~]+/g, "").toLowerCase();
         if (["谢谢", "谢谢~", "谢谢·~~~", "谢谢~~"].some(phrase => normalized.includes("谢谢"))) {
           localStorage.setItem("adClosed", "true");
-          alert("验证成功，广告将不再出现！（清理缓存可能导致需要重新验证）");
+          alert("验证成功，广告将不再出现！");
           document.getElementById("adBanner").remove();
           document.getElementById("overlay").remove();
         } else {
-          alert("检测失败，请重新复制！");
+          alert("检测失败，请复制自动回复粘贴！");
         }
       }
     });
   </script>
 </body>
 </html>
-
