@@ -246,7 +246,7 @@
     });
 
     document.getElementById("followBtn").addEventListener("click", () => {
-      const userReply = prompt("关注牢www 后点击私信，再复制自动回复粘贴到此处：");
+      const userReply = prompt("关注牢www 后你会收到牢www的自动回复，将自动回复的内容复制到这里");
       if (userReply) {
         const normalized = userReply.replace(/[\s·~]+/g, "").toLowerCase();
         if (["谢谢", "谢谢~", "谢谢·~~~", "谢谢~~"].some(phrase => normalized.includes("谢谢"))) {
