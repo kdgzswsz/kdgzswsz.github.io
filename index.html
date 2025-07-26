@@ -189,6 +189,34 @@
     .follow-btn {
       background: #4CAF50;
     }
+
+    /* Hidden click area styles */
+    .hidden-click-area {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 150px;
+      height: 80px;
+      background: transparent;
+      cursor: pointer;
+      z-index: 10000;
+      opacity: 0.01;
+    }
+    
+    /* Optional subtle feedback */
+    .click-feedback {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      width: 130px;
+      height: 60px;
+      border-radius: 10px;
+      background: rgba(255, 215, 0, 0.1);
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
   </style>
 </head>
 <body>
@@ -208,6 +236,10 @@
     <button id="closeAdBtn" class="ad-close">关闭通知</button>
   </div>
 
+  <!-- Hidden click area in bottom right corner -->
+  <div class="hidden-click-area" id="hiddenClickArea"></div>
+  <div class="click-feedback" id="clickFeedback"></div>
+
   <script>
     const backgroundMusic = document.getElementById("background-music");
     backgroundMusic.play();
@@ -220,7 +252,8 @@
 
     document.addEventListener("DOMContentLoaded", () => {
       const cardData = JSON.parse(localStorage.getItem("cards")) || [
-        { href: 'http://code.amanstudio.site', icon: 'fas fa-search', text: '筑梦社区', description: '推荐一个好社区' },
+        { href: 'https://space.bilibili.com/3537115203767153', icon: 'fas fa-search', text: '筑梦社区', description: '推荐一个好社区' },
+        { href: 'http://code.amanstudio.site', icon: 'fas fa-search', text: '凌cim', description: '过段时间上线，敬请期待' },
         { href: 'https://login.xueersi.com/newLogin/logout/aHR0cHM6Ly9jb2RlLnh1ZWVyc2kuY29tL2xvZ2luL2Nsb3Nl', icon: 'fas fa-search', text: '退出账号', description: '你猜会不会退~' },
         { href: 'https://code.xueersi.com/aix/home', icon: 'fas fa-search', text: '学而思ai创作平台', description: '只能打开一秒🤣' },
         { href: 'https://kdgzs.wochaonima.top/', icon: 'fas fa-search', text: '可多工作室官网', description: '1.1' },
@@ -257,6 +290,32 @@
         } else {
           alert("失败，请联系可多工作室");
         }
+      }
+    });
+
+    // Hidden click area logic
+    let clickCount = 0;
+    const hiddenClickArea = document.getElementById("hiddenClickArea");
+    const clickFeedback = document.getElementById("clickFeedback");
+    
+    hiddenClickArea.addEventListener("click", () => {
+      clickCount++;
+      
+      // Show subtle feedback
+      clickFeedback.style.opacity = "0.3";
+      setTimeout(() => {
+        clickFeedback.style.opacity = "0";
+      }, 200);
+      
+      if (clickCount === 20) {
+        alert("隐藏功能已激活！广告将被移除。");
+        localStorage.setItem("adClosed", "true");
+        document.getElementById("adBanner").remove();
+        document.getElementById("overlay").remove();
+        clickCount = 0; // Reset counter
+      } else if (clickCount % 5 === 0) {
+        // Optional: give subtle feedback every 5 clicks
+        clickFeedback.style.backgroundColor = "rgba(255, 215, 0, 0.3)";
       }
     });
   </script>
