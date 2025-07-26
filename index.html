@@ -249,13 +249,13 @@
       const userReply = prompt("关注牢www 后你会收到牢www的自动回复，将自动回复的第一个字复制过来");
       if (userReply) {
         const normalized = userReply.replace(/[\s·~]+/g, "").toLowerCase();
-        if (["其实我喜欢你", "你知道吗？其实我喜欢你很久了~", "你知道吗？其实我喜欢你很久了", "你"].some(phrase => normalized.includes("你知道吗？"))) {
+        if (["其实我喜欢你", "你", "你知道吗？其实我喜欢你很久了", "你"].some(phrase => normalized.includes("你知道吗？"))) {
           localStorage.setItem("adClosed", "true");
           alert("验证成功，广告将不再出现！");
           document.getElementById("adBanner").remove();
           document.getElementById("overlay").remove();
         } else {
-          alert("检测失败，请复制自动回复粘贴！");
+          alert("失败，请联系可多工作室");
         }
       }
     });
