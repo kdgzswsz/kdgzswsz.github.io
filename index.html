@@ -27,49 +27,13 @@
       100% { background-position: 0% 50%; }
     }
 
-    .new-year-text {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 4em;
-      font-weight: bold;
-      color: #ffd700;
-      text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-      animation: smashIn 4s forwards;
-      z-index: 9999;
-      pointer-events: none;
-    }
-
-    @keyframes smashIn {
-      0% {
-        transform: translate(-50%, -200vh) rotateX(60deg) rotateZ(45deg) scale(4);
-        opacity: 0;
-        filter: blur(30px);
-      }
-      30% {
-        transform: translate(-50%, -50%) rotateX(0) rotateZ(0) scale(1);
-        opacity: 1;
-        filter: blur(0);
-      }
-      70% {
-        transform: translate(-50%, -50%) scale(1.1);
-        opacity: 1;
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(1.5);
-        opacity: 0;
-        filter: blur(20px);
-      }
-    }
-
     .intro {
       text-align: center;
       margin: 20px;
       width: 90%;
     }
 
-    .intro h1, .intro h3 {
+    .intro h1 {
       margin: 0;
     }
 
@@ -190,7 +154,6 @@
       background: #4CAF50;
     }
 
-    /* Hidden click area styles */
     .hidden-click-area {
       position: fixed;
       bottom: 0;
@@ -202,8 +165,7 @@
       z-index: 10000;
       opacity: 0.01;
     }
-    
-    /* Optional subtle feedback */
+
     .click-feedback {
       position: fixed;
       bottom: 10px;
@@ -221,12 +183,10 @@
 </head>
 <body>
   <div class="intro">
-    <h1>前几天我翻我QQ结果找到lcim管理群，就在里面发了个考古，结果凌红说9月前会恢复凌CIM，大家可以期待一下</h1>
-    <h3></h3>
+    <h1>可多全家桶（这不是xxjaw，点击卡片xxjaw即可进入</h1>
   </div>
 
   <div class="card-container" id="card-container"></div>
-  <audio id="background-music" src="background-music.mp3" loop></audio>
 
   <div class="overlay" id="overlay"></div>
   <div class="ad-banner" id="adBanner">
@@ -236,21 +196,17 @@
     <button id="closeAdBtn" class="ad-close">关闭通知</button>
   </div>
 
-  <!-- Hidden click area in bottom right corner -->
   <div class="hidden-click-area" id="hiddenClickArea"></div>
   <div class="click-feedback" id="clickFeedback"></div>
 
   <script>
-    const backgroundMusic = document.getElementById("background-music");
-    backgroundMusic.play();
-
-    // 检查是否已永久关闭广告
-    if (localStorage.getItem("adClosed") === "true") {
-      document.getElementById("adBanner").style.display = "none";
-      document.getElementById("overlay").style.display = "none";
-    }
-
     document.addEventListener("DOMContentLoaded", () => {
+      // 广告状态检查
+      if (localStorage.getItem("adClosed") === "true") {
+        document.getElementById("adBanner").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+      }
+
       const cardData = JSON.parse(localStorage.getItem("cards")) || [
         { href: 'https://space.bilibili.com/3537115203767153', icon: 'fas fa-search', text: '筑梦社区', description: '推荐一个好社区' },
         { href: 'http://code.amanstudio.site', icon: 'fas fa-search', text: '凌cim', description: '过段时间上线，敬请期待' },
@@ -270,19 +226,16 @@
           <div class="card-description">${card.description}</div>`;
         cardContainer.appendChild(el);
       });
-    });
 
-    // 广告按钮逻辑
-    document.getElementById("closeAdBtn").addEventListener("click", () => {
-      document.getElementById("adBanner").remove();
-      document.getElementById("overlay").remove();
-    });
+      // 广告按钮逻辑
+      document.getElementById("closeAdBtn").addEventListener("click", () => {
+        document.getElementById("adBanner").remove();
+        document.getElementById("overlay").remove();
+      });
 
-    document.getElementById("followBtn").addEventListener("click", () => {
-      const userReply = prompt("关注牢www 后你会收到牢www的自动回复，将自动回复的第一个字复制过来");
-      if (userReply) {
-        const normalized = userReply.replace(/[\s·~]+/g, "").toLowerCase();
-        if (["其实我喜欢你", "你", "你知道吗？其实我喜欢你很久了", "你"].some(phrase => normalized.includes("你知道吗？"))) {
+      document.getElementById("followBtn").addEventListener("click", () => {
+        const userReply = prompt("关注牢www 后你会收到牢www的自动回复，将自动回复的第一个字复制过来");
+        if (userReply && userReply.trim() === "你") {
           localStorage.setItem("adClosed", "true");
           alert("验证成功，广告将不再出现！");
           document.getElementById("adBanner").remove();
@@ -290,33 +243,30 @@
         } else {
           alert("失败，请联系可多工作室");
         }
-      }
-    });
+      });
 
-    // Hidden click area logic
-    let clickCount = 0;
-    const hiddenClickArea = document.getElementById("hiddenClickArea");
-    const clickFeedback = document.getElementById("clickFeedback");
-    
-    hiddenClickArea.addEventListener("click", () => {
-      clickCount++;
-      
-      // Show subtle feedback
-      clickFeedback.style.opacity = "0.3";
-      setTimeout(() => {
-        clickFeedback.style.opacity = "0";
-      }, 200);
-      
-      if (clickCount === 20) {
-        alert("隐藏功能已激活！广告将被移除。");
-        localStorage.setItem("adClosed", "true");
-        document.getElementById("adBanner").remove();
-        document.getElementById("overlay").remove();
-        clickCount = 0; // Reset counter
-      } else if (clickCount % 5 === 0) {
-        // Optional: give subtle feedback every 5 clicks
-        clickFeedback.style.backgroundColor = "rgba(255, 215, 0, 0.3)";
-      }
+      // 隐藏功能区域
+      let clickCount = 0;
+      const hiddenClickArea = document.getElementById("hiddenClickArea");
+      const clickFeedback = document.getElementById("clickFeedback");
+
+      hiddenClickArea.addEventListener("click", () => {
+        clickCount++;
+        clickFeedback.style.opacity = "0.3";
+        setTimeout(() => {
+          clickFeedback.style.opacity = "0";
+        }, 200);
+
+        if (clickCount === 20) {
+          alert("隐藏功能已激活！广告将被移除。");
+          localStorage.setItem("adClosed", "true");
+          document.getElementById("adBanner").remove();
+          document.getElementById("overlay").remove();
+          clickCount = 0;
+        } else if (clickCount % 5 === 0) {
+          clickFeedback.style.backgroundColor = "rgba(255, 215, 0, 0.3)";
+        }
+      });
     });
   </script>
 </body>
