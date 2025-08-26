@@ -138,8 +138,16 @@
       border-radius: 10px;
     }
 
-    .ad-close, .follow-btn {
+    .ad-banner a {
       margin-top: 10px;
+      color: #2196F3;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .ad-close {
+      margin-top: 15px;
       background: #ff4444;
       color: #fff;
       border: none;
@@ -148,10 +156,6 @@
       font-size: 16px;
       cursor: pointer;
       transition: 0.3s;
-    }
-
-    .follow-btn {
-      background: #4CAF50;
     }
 
     .hidden-click-area {
@@ -190,9 +194,9 @@
 
   <div class="overlay" id="overlay"></div>
   <div class="ad-banner" id="adBanner">
-    <img src="ggt.png" alt="广告图片" />
-    <span>这是广告</span>
-    <button id="followBtn" class="follow-btn">我已关注</button>
+    <img src="ggt.png" alt="lcim logo" />
+    <span>lcim回归辣 🎉</span>
+    <a href="https://lcim.guozhufeng.com/" target="_blank">👉 点击进入 lcim</a>
     <button id="closeAdBtn" class="ad-close">关闭通知</button>
   </div>
 
@@ -228,18 +232,7 @@
       document.getElementById("closeAdBtn").addEventListener("click", () => {
         document.getElementById("adBanner").remove();
         document.getElementById("overlay").remove();
-      });
-
-      document.getElementById("followBtn").addEventListener("click", () => {
-        const userReply = prompt("关注牢www 后你会收到牢www的自动回复，将自动回复的第一个字复制过来");
-        if (userReply && userReply.trim() === "你") {
-          localStorage.setItem("adClosed", "true");
-          alert("验证成功，广告将不再出现！");
-          document.getElementById("adBanner").remove();
-          document.getElementById("overlay").remove();
-        } else {
-          alert("失败，请联系可多工作室");
-        }
+        localStorage.setItem("adClosed", "true");
       });
 
       // 隐藏功能区域
